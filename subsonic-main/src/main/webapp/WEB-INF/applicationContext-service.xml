@@ -500,11 +500,13 @@
 	<bean id="artistInfoClient" class="com.github.hakko.musiccabinet.ws.lastfm.ArtistInfoClient">
 		<property name="webserviceHistoryService" ref="webserviceHistoryService"/>
 		<property name="throttleService" ref="throttleService"/>
+		<property name="locale" value="#{settingsService.locale}"/>
 	</bean>	
 
 	<bean id="albumInfoClient" class="com.github.hakko.musiccabinet.ws.lastfm.AlbumInfoClient">
 		<property name="webserviceHistoryService" ref="webserviceHistoryService"/>
 		<property name="throttleService" ref="throttleService"/>
+		<property name="locale" value="#{settingsService.locale}"/>
 	</bean>	
 
 	<bean id="artistSimilarityClient" class="com.github.hakko.musiccabinet.ws.lastfm.ArtistSimilarityClient">
@@ -534,6 +536,7 @@
 	
 	<bean id="tagInfoClient" class="com.github.hakko.musiccabinet.ws.lastfm.TagInfoClient">
 		<property name="throttleService" ref="throttleService"/>
+		<property name="locale" value="#{settingsService.locale}"/>
 	</bean>
 
 	<bean id="userTopArtistsClient" class="com.github.hakko.musiccabinet.ws.lastfm.UserTopArtistsClient">
