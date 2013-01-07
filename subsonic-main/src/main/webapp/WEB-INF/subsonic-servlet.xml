@@ -86,9 +86,6 @@
         <property name="viewName" value="lyrics"/>
         <property name="libraryBrowserService" ref="libraryBrowserService"/>
     </bean>
-    <bean id="allmusicController" class="net.sourceforge.subsonic.controller.AllmusicController">
-        <property name="viewName" value="allmusic"/>
-    </bean>
     <bean id="podcastController" class="net.sourceforge.subsonic.controller.PodcastController">
         <property name="viewName" value="podcast"/>
         <property name="playlistService" ref="playlistService"/>
@@ -143,6 +140,20 @@
         <property name="playerService" ref="playerService"/>
         <property name="libraryUpdateService" ref="libraryUpdateService"/>
         <property name="nameSearchService" ref="nameSearchService"/>
+        <property name="starService" ref="starService"/>
+    </bean>
+    <bean id="advancedSearchController" class="net.sourceforge.subsonic.controller.AdvancedSearchController">
+        <property name="viewName" value="advancedSearch"/>
+        <property name="nameSearchService" ref="nameSearchService"/>
+        <property name="tagService" ref="tagService"/>
+        <property name="mediaFolderService" ref="mediaFolderService"/>
+    </bean>
+    <bean id="advancedSearchResultController" class="net.sourceforge.subsonic.controller.AdvancedSearchResultController">
+        <property name="viewName" value="advancedSearchResult"/>
+        <property name="nameSearchService" ref="nameSearchService"/>
+        <property name="securityService" ref="securityService"/>
+        <property name="settingsService" ref="settingsService"/>
+        <property name="mediaFileService" ref="mediaFileService"/>
         <property name="starService" ref="starService"/>
     </bean>
     <bean id="settingsController" class="net.sourceforge.subsonic.controller.SettingsController">
@@ -387,6 +398,10 @@
         <property name="transcodingService" ref="transcodingService"/>
         <property name="audioScrobblerService" ref="audioScrobblerService"/>
     </bean>
+    <bean id="hlsController" class="net.sourceforge.subsonic.controller.HLSController">
+        <property name="playerService" ref="playerService"/>
+        <property name="mediaFileService" ref="mediaFileService"/>
+    </bean>
     <bean id="videoPlayerController" class="net.sourceforge.subsonic.controller.VideoPlayerController">
         <property name="viewName" value="videoPlayer"/>
         <property name="mediaFileService" ref="mediaFileService"/>
@@ -435,6 +450,7 @@
         <property name="shareService" ref="shareService"/>
         <property name="downloadController" ref="downloadController"/>
         <property name="streamController" ref="streamController"/>
+        <property name="hlsController" ref="hlsController"/>
         <property name="coverArtController" ref="coverArtController"/>
         <property name="userSettingsController" ref="userSettingsController"/>
         <property name="leftController" ref="leftController"/>
@@ -448,6 +464,8 @@
         <property name="playlistGeneratorService" ref="playlistGeneratorService"/>
         <property name="artistRecommendationService" ref="artistRecommendationService"/>
         <property name="mediaFolderService" ref="mediaFolderService"/>
+        <property name="directoryBrowserService" ref="directoryBrowserService"/>
+        <property name="starService" ref="starService"/>
     </bean>
     <bean id="dbController" class="net.sourceforge.subsonic.controller.DBController">
         <property name="viewName" value="db"/>
@@ -496,6 +514,8 @@
                 <prop key="/videoPlayer.view">videoPlayerController</prop>
                 <prop key="/nowPlaying.view">nowPlayingController</prop>
                 <prop key="/search.view">searchController</prop>
+                <prop key="/advancedSearch.view">advancedSearchController</prop>
+                <prop key="/advancedSearchResult.view">advancedSearchResultController</prop>
                 <prop key="/settings.view">settingsController</prop>
                 <prop key="/playerSettings.view">playerSettingsController</prop>
                 <prop key="/shareSettings.view">shareSettingsController</prop>
@@ -513,7 +533,6 @@
                 <prop key="/avatarUpload.view">avatarUploadController</prop>
                 <prop key="/userSettings.view">userSettingsController</prop>
                 <prop key="/passwordSettings.view">passwordSettingsController</prop>
-                <prop key="/allmusic.view">allmusicController</prop>
                 <prop key="/home.view">homeController</prop>
                 <prop key="/editTags.view">editTagsController</prop>
                 <prop key="/radio.view">radioController</prop>
@@ -543,6 +562,7 @@
                 <prop key="/rest/**">restController</prop>
                 <prop key="/play.m3u">m3uController</prop>
                 <prop key="/stream/**">streamController</prop>
+                <prop key="/hls/**">hlsController</prop>
                 <prop key="/share/**">externalPlayerController</prop>
             </props>
         </property>
