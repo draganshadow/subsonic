@@ -101,6 +101,7 @@ public class SettingsService {
     private static final String KEY_LICENSE_CODE = "LicenseCode";
     private static final String KEY_LICENSE_DATE = "LicenseDate";
     private static final String KEY_DOWNSAMPLING_COMMAND = "DownsamplingCommand2";
+    private static final String KEY_HLS_COMMAND = "HlsCommand2";
     private static final String KEY_JUKEBOX_COMMAND = "JukeboxCommand";
     private static final String KEY_REWRITE_URL = "RewriteUrl";
     private static final String KEY_LDAP_ENABLED = "LdapEnabled";
@@ -167,6 +168,7 @@ public class SettingsService {
     private static final String DEFAULT_LICENSE_CODE = null;
     private static final String DEFAULT_LICENSE_DATE = null;
     private static final String DEFAULT_DOWNSAMPLING_COMMAND = "lame -S -h --resample 44.1 -b %b --tt %t --ta %a --tl %l %s -";
+    private static final String DEFAULT_HLS_COMMAND = "ffmpeg -ss %o -t %d -i %s -async 1 -b %bk -s %wx%h -ar 44100 -ac 2 -v 0 -f mpegts -vcodec libx264 -preset superfast -acodec libmp3lame -threads 0 -";
     private static final String DEFAULT_JUKEBOX_COMMAND = "ffmpeg -ss %o -i %s -v 0 -f au -";
     private static final boolean DEFAULT_REWRITE_URL = true;
     private static final boolean DEFAULT_LDAP_ENABLED = false;
@@ -644,6 +646,14 @@ public class SettingsService {
         setProperty(KEY_DOWNSAMPLING_COMMAND, command);
     }
 
+    public String getHlsCommand() {
+        return properties.getProperty(KEY_HLS_COMMAND, DEFAULT_HLS_COMMAND);
+    }
+
+    public void setHlsCommand(String command) {
+        setProperty(KEY_HLS_COMMAND, command);
+    }
+
     public String getJukeboxCommand() {
         return properties.getProperty(KEY_JUKEBOX_COMMAND, DEFAULT_JUKEBOX_COMMAND);
     }
@@ -1053,10 +1063,10 @@ public class SettingsService {
         // Sonic white happens to be the only theme with icons for genre browser/radio,
         // so change everybody's theme to it the first time we run MusicCabinet.
         if (properties.getProperty(KEY_MUSICCABINET_FIRST_INVOCATION) == null) {
-        	setThemeId("sonic_white");
+        	setThemeId("musiccabinet_white");
         	for (User user : userDao.getAllUsers()) {
                 UserSettings settings = getUserSettings(user.getUsername());
-                settings.setThemeId("sonic_white");
+                settings.setThemeId("musiccabinet_white");
                 settings.setChanged(new Date());
                 updateUserSettings(settings);
         	}
