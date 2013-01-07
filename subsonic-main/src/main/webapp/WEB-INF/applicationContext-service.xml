@@ -369,12 +369,14 @@
 		<property name="artistInfoClient" ref="artistInfoClient"/>
 		<property name="artistInfoDao" ref="artistInfoDao"/>
 		<property name="webserviceHistoryService" ref="webserviceHistoryService"/>
+		<property name="locale" value="#{settingsService.locale}"/>
 	</bean>	
 
 	<bean id="albumInfoService" class="com.github.hakko.musiccabinet.service.lastfm.AlbumInfoService">
 		<property name="albumInfoClient" ref="albumInfoClient"/>
 		<property name="albumInfoDao" ref="albumInfoDao"/>
 		<property name="webserviceHistoryService" ref="webserviceHistoryService"/>
+		<property name="locale" value="#{settingsService.locale}"/>
 	</bean>
 
 	<bean id="artistRelationService" class="com.github.hakko.musiccabinet.service.lastfm.ArtistRelationService">
@@ -404,6 +406,7 @@
 		<property name="tagInfoClient" ref="tagInfoClient"/>
 		<property name="tagInfoDao" ref="tagInfoDao"/>
 		<property name="tagDao" ref="tagDao"/>
+		<property name="locale" value="#{settingsService.locale}"/>
 	</bean>
 
 	<bean id="userTopArtistsService" class="com.github.hakko.musiccabinet.service.lastfm.UserTopArtistsService">
@@ -500,13 +503,11 @@
 	<bean id="artistInfoClient" class="com.github.hakko.musiccabinet.ws.lastfm.ArtistInfoClient">
 		<property name="webserviceHistoryService" ref="webserviceHistoryService"/>
 		<property name="throttleService" ref="throttleService"/>
-		<property name="locale" value="#{settingsService.locale}"/>
 	</bean>	
 
 	<bean id="albumInfoClient" class="com.github.hakko.musiccabinet.ws.lastfm.AlbumInfoClient">
 		<property name="webserviceHistoryService" ref="webserviceHistoryService"/>
 		<property name="throttleService" ref="throttleService"/>
-		<property name="locale" value="#{settingsService.locale}"/>
 	</bean>	
 
 	<bean id="artistSimilarityClient" class="com.github.hakko.musiccabinet.ws.lastfm.ArtistSimilarityClient">
@@ -536,7 +537,6 @@
 	
 	<bean id="tagInfoClient" class="com.github.hakko.musiccabinet.ws.lastfm.TagInfoClient">
 		<property name="throttleService" ref="throttleService"/>
-		<property name="locale" value="#{settingsService.locale}"/>
 	</bean>
 
 	<bean id="userTopArtistsClient" class="com.github.hakko.musiccabinet.ws.lastfm.UserTopArtistsClient">
