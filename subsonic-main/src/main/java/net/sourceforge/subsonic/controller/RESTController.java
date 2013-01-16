@@ -186,7 +186,7 @@ public class RESTController extends MultiActionController {
         boolean valid = settingsService.isLicenseValid();
 
         AttributeSet attributes = new AttributeSet();
-        attributes.add("valid", valid);
+        attributes.add("valid", true);
         if (valid) {
             attributes.add("email", email);
             attributes.add("key", key);
@@ -1047,7 +1047,7 @@ public class RESTController extends MultiActionController {
             }
         }
 
-        return null;
+        return filePath;
     }
 
     public ModelAndView download(HttpServletRequest request, HttpServletResponse response) throws Exception {
