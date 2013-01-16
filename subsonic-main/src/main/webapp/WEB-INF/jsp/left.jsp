@@ -35,19 +35,12 @@
 		<a href="#${index.key}" accesskey="${index.key}">${index.key}</a>
 	</c:forEach>
 </div>
-
-<c:if test="${not empty model.statistics}">
-	<div class="detail">
-		<fmt:message key="left.statistics">
-			<fmt:param value="${model.statistics.artistCount}"/>
-			<fmt:param value="${model.statistics.albumCount}"/>
-			<fmt:param value="${model.statistics.trackCount}"/>
-			<fmt:param value="${model.statisticsBytes}"/>
-			<fmt:param value="${model.statistics.totalLengthInHours}"/>
-		</fmt:message>
-	</div>
+<c:if test="${empty model.filebased}">
+	<hr>
+	<c:if test="${model.uploadRole}"><a target="main" href="more.view">Upload new music</a><br></c:if>
+	<c:if test="${model.adminRole}"><a target="main" href="missingAlbums.view">Missing albums</a><br></c:if>
+	<a href="left.view?method=file">File-based browsing</a>
 </c:if>
-
 <c:if test="${not empty model.filebased}">
     <div style="padding:5px;padding-bottom:15px;border:1px solid #<spring:theme code="detailColor"/>">
 		<img src="icons/error.png" alt=""/><b>File-based browsing.<br/></b>
@@ -86,7 +79,8 @@
 </c:if>
 
 <c:if test="${not empty model.indexes or not empty model.currentTag}">
-	<h2 class="bgcolor1">Artists</h2>
+	<hr>
+	<h2 class="bgcolor1">Genres</h2>
 	<c:if test="${not empty model.tags}">
 		<select id="tag">
 		<c:forEach items="${model.tags}" var="tag">
@@ -97,6 +91,7 @@
 		<c:if test="${not empty model.currentTag}">
 			<br><a href="javascript:noop()" onclick="javascript:top.playlist.onPlayGenreRadio(new Array('${model.currentTag}'))">Play ${model.currentTag} radio</a>
 		</c:if>
+		<hr>
 	</c:if>
 	<div id="leftMessage"></div>
 
@@ -143,22 +138,18 @@
 		</p>
 	</c:forEach>
 </c:if>
-
-<c:if test="${empty model.filebased}">
-	<div style="height:2em"></div><hr>
-	<c:if test="${model.uploadRole}"><a target="main" href="more.view">Upload new music</a><br></c:if>
-	<c:if test="${model.adminRole}"><a target="main" href="missingAlbums.view">Missing albums</a><br></c:if>
-	<a href="left.view?method=file">File-based browsing</a>
+<hr>
+<c:if test="${not empty model.statistics}">
+	<div class="detail">
+		<fmt:message key="left.statistics">
+			<fmt:param value="${model.statistics.artistCount}"/>
+			<fmt:param value="${model.statistics.albumCount}"/>
+			<fmt:param value="${model.statistics.trackCount}"/>
+			<fmt:param value="${model.statisticsBytes}"/>
+			<fmt:param value="${model.statistics.totalLengthInHours}"/>
+		</fmt:message>
+	</div>
 </c:if>
-
-<div style="height:5em"></div>
-
-<div class="bgcolor2" style="opacity: 1.0; clear: both; position: fixed; bottom: 0; right: 0; left: 0;
-	  padding: 0.25em 0.75em 0.25em 0.75em; border-top:1px solid black; max-width: 850px;">
-	<c:forEach items="${model.indexes}" var="index">
-		<a href="#${index.key}" accesskey="${index.key}">${index.key}</a>
-	</c:forEach>
-</div>
 
 <c:if test="${not empty model.reluctantArtistLoading and not empty model.indexedLetter}">
 <script type="text/javascript">

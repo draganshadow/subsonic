@@ -49,6 +49,11 @@ public class TopController extends ParameterizableViewController {
         List<MediaFolder> allMediaFolders = mediaFolderService.getIndexedMediaFolders();
         User user = securityService.getCurrentUser(request);
 
+    	List<MediaFolder> mediaFolders = mediaFolderService.getAllMediaFolders();
+    	if (mediaFolders.size() > 0) {
+    		map.put("mediaFolders", mediaFolders);
+    	}
+    	
         map.put("user", user);
         map.put("mediaFoldersExist", !allMediaFolders.isEmpty());
         map.put("brand", settingsService.getBrand());

@@ -37,10 +37,15 @@
 	            <a href="radio.view?" target="main"><img src="<spring:theme code="radioImage"/>" title="Radio" alt="Radio"></a><br>
 	            <a href="radio.view?" target="main">Radio</a>
 	        </td>
-	        <td style="min-width:4em;padding-right:1.5em">
-	            <a href="fileTree.view?" target="main"><img src="<spring:theme code="fileTreeImage"/>" title="File tree" alt="File tree"></a><br>
-	            <a href="fileTree.view?" target="main">File tree</a>
-	        </td>
+	        <c:if test="${not empty model.mediaFolders}">
+				<c:forEach items="${model.mediaFolders}" var="mediaFolder">
+			        <td style="min-width:4em;padding-right:1.5em">
+						<sub:url value="main.view" var="mainUrl"><sub:param name="path" value="${mediaFolder.path}"/></sub:url>
+			            <a href="${mainUrl}" target="main"><img src="<spring:theme code="fileTreeImage"/>" title="${mediaFolder.name}" alt="${mediaFolder.name}"></a><br>
+			            <a href="${mainUrl}" target="main">${mediaFolder.name}</a>
+			        </td>
+				</c:forEach>
+			</c:if>
             <td style="min-width:4em;padding-right:1.5em">
                 <a href="podcastReceiver.view?" target="main"><img src="<spring:theme code="podcastLargeImage"/>" title="${podcast}" alt="${podcast}"></a><br>
                 <a href="podcastReceiver.view?" target="main">${podcast}</a>
@@ -55,6 +60,10 @@
                     <a href="settings.view?" target="main">${settings}</a>
                 </td>
             </c:if>
+	        <td style="min-width:4em;padding-right:1.5em">
+	            <a href="fileTree.view?" target="main"><img src="<spring:theme code="fileTreeImage"/>" title="File tree" alt="File tree"></a><br>
+	            <a href="fileTree.view?" target="main">File tree</a>
+	        </td>
             <td style="min-width:4em;padding-right:1.5em">
                 <a href="status.view?" target="main"><img src="<spring:theme code="statusImage"/>" title="${status}" alt="${status}"></a><br>
                 <a href="status.view?" target="main">${status}</a>
